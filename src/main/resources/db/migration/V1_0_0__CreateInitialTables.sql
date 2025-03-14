@@ -1,0 +1,37 @@
+CREATE SEQUENCE CAR_DEALER_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE car_dealer (
+  id NUMBER(38, 0) NOT NULL,
+   name VARCHAR2(255),
+   CONSTRAINT pk_cardealer PRIMARY KEY (id)
+);
+
+ALTER TABLE car_dealer ADD CONSTRAINT uc_cardealer_name UNIQUE (name);
+
+
+CREATE SEQUENCE brand_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE brand (
+  id NUMBER(38, 0) NOT NULL,
+   name VARCHAR2(255),
+   car_dealer_id NUMBER(38, 0),
+   CONSTRAINT pk_brand PRIMARY KEY (id)
+);
+
+ALTER TABLE brand ADD CONSTRAINT uc_brand_name UNIQUE (name);
+
+ALTER TABLE brand ADD CONSTRAINT FK_BRAND_ON_CAR_DEALER FOREIGN KEY (car_dealer_id) REFERENCES car_dealer (id);
+
+CREATE SEQUENCE car_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE car (
+  id NUMBER(38, 0) NOT NULL,
+   model VARCHAR2(255),
+   brand_id NUMBER(38, 0),
+   active NUMBER(1),
+   CONSTRAINT pk_car PRIMARY KEY (id)
+);
+
+ALTER TABLE car ADD CONSTRAINT uc_car_model UNIQUE (model);
+
+ALTER TABLE car ADD CONSTRAINT FK_CAR_ON_BRAND FOREIGN KEY (brand_id) REFERENCES brand (id);

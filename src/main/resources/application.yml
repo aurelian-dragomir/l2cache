@@ -1,0 +1,30 @@
+spring.application.name: L2Cache
+
+spring:
+
+  datasource:
+    url: jdbc:h2:mem:testdb;Mode=Oracle
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate.ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
+          default_cache_concurrency_strategy: read-write
+  flyway:
+    baselineOnMigrate: true
+    locations:
+      - db/migration
+  h2:
+    console.enabled: true
+
+  logging:
+    level.root: ERROR
+    net.shahto: DEBUG
+    org.hibernate.cache: DEBUG
