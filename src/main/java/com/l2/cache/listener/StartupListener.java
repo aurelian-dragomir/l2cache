@@ -1,4 +1,4 @@
-package com.l2.cache;
+package com.l2.cache.listener;
 
 import com.l2.cache.repository.CarDealerRepository;
 import lombok.RequiredArgsConstructor;
