@@ -1,5 +1,6 @@
 package com.l2.cache.listener;
 
+import com.l2.cache.CarDealerService;
 import com.l2.cache.repository.CarDealerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -13,6 +14,7 @@ import java.util.List;
 public class StartupListener {
 
     private final CarDealerRepository carDealerRepository;
+    private final CarDealerService carDealerService;
 
     @EventListener
     public void onStartup(ApplicationReadyEvent e) {

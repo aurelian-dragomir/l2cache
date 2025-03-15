@@ -11,12 +11,16 @@ import org.hibernate.annotations.NaturalId;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table
 @Getter
 @Setter
 @Accessors(fluent = true)
 @ToString
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class CarDealer {
 
     @Id
@@ -28,6 +32,7 @@ public class CarDealer {
     private String name;
 
     @OneToMany(mappedBy = "carDealer")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Brand> brands = new LinkedHashSet<>();
 
 }

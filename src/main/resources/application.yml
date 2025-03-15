@@ -24,7 +24,8 @@ spring:
   h2:
     console.enabled: true
 
-  logging:
-    level.root: ERROR
+logging:
+  level:
+    root: info
     net.shahto: DEBUG
-    org.hibernate.cache: DEBUG
+#    org.hibernate.cache: DEBUG

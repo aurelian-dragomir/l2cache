@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 
 import java.util.LinkedHashSet;
@@ -16,6 +18,7 @@ import java.util.Set;
 @Setter
 @Accessors(fluent = true)
 @ToString(exclude = "carDealer")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Brand {
 
     @Id
@@ -27,9 +30,11 @@ public class Brand {
     private String name;
 
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Car> cars = new LinkedHashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_dealer_id", referencedColumnName = "id")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private CarDealer carDealer;
 }
